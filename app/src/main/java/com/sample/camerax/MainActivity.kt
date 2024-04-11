@@ -132,6 +132,7 @@ class MainActivity : ComponentActivity() {
                                     scope.launch {
                                         scaffoldState.bottomSheetState.expand()
                                     }
+                                    Toast.makeText(applicationContext, "Got Camera API Key:: " + getAPIKeyFromNdk(), Toast.LENGTH_SHORT).show()
                                 }
                             ) {
                                 Icon(
@@ -257,10 +258,14 @@ class MainActivity : ComponentActivity() {
         }
     }
 
+    private external fun getAPIKeyFromNdk() : String
     companion object {
         private val CAMERAX_PERMISSIONS = arrayOf(
             Manifest.permission.CAMERA,
             Manifest.permission.RECORD_AUDIO,
         )
+        init {
+         System.loadLibrary("camerax")
+        }
     }
 }
